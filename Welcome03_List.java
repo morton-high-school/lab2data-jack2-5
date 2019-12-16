@@ -13,7 +13,7 @@ public class Welcome03_List {
              "station/station_id", "station/state",
              "station/latitude", "station/longitude");
       System.out.println("Total stations: " + allstns.size());
-
+      int count = 0;
       Scanner sc = new Scanner(System.in);
       System.out.println("Enter a state abbreviation: ");
       String state = sc.next();
@@ -21,7 +21,19 @@ public class Welcome03_List {
       for (WeatherStation ws : allstns) {
          if (ws.isLocatedInState(state)) {
             System.out.println("  " + ws.getId() + ": " + ws.getName());
+            count++;
          }
       }
+      double hold = 0;
+      String bob = "";
+      for(WeatherStation ws : allstns){
+        if(ws.stationLat() < hold){
+          bob = ws.getName();
+          hold = ws.stationLat();
+        }
+      }
+      System.out.println(bob);
+      System.out.println(hold);
+      System.out.println(count);
    }
 }
