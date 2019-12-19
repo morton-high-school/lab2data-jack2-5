@@ -25,11 +25,12 @@ public class THORData{
     }catch(Exception e){
       System.out.println(e);
     }
-    System.out.print(most[0]);
-    System.out.print(most[0]);
-    System.out.print(most[0]);
-    System.out.print(most[0]);
-    System.out.print(ammoCnt);
+    double percent = (Double.parseDouble(most[3])/ammoCnt)*100;
+    System.out.println(most[0]);
+    System.out.println(most[1]);
+    System.out.println(most[2]);
+    System.out.println(most[3]);
+    System.out.println(percent+ "%");
 
 
   }

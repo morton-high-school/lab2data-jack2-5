@@ -27,53 +27,46 @@ public class CerealInfo{
       Scanner header = new Scanner(new File("Cereal.csv"));
       head = header.nextLine().split(",");
       String[] home = new String[head.length];
-      String[] current = new String[13];
-      String[][] shelves = new String[3][13];
+      double[] current = new double[13];
+      double[][] shelves = new double[3][13];
+      int[] amount = new int[3];
       int round = 0;
-      System.out.println("start");
       while(header.hasNextLine()){
-        System.out.println("line: "+ round);
         Scanner inc = new Scanner(header.nextLine());
         inc.useDelimiter(",");
         int i = 0;
         inc.next();
         inc.next();
         for(i = 0; inc.hasNext();i++){
-          //
-          current[i] = inc.next();
-           // System.out.println("next: "+ current[i]);
+          current[i] = inc.nextDouble();
         }
-        int level = Integer.parseInt(current[i-4]);
-        System.out.println(current[i-4]);
+        int level = (int)current[9];
+        amount[level-1] += 1;
         if(round > 0){
           for(int k = 0; k < current.length; k++){
-            // System.out.println("add: "+ round);
-            // System.out.println("shelf pre: "+ shelves[level-1][k]);
             try{
-              shelves[level-1][k] = String.valueOf(Double.parseDouble(current[k]) +Double.parseDouble(shelves[level-1][k]));
+              shelves[level-1][k] = current[k] +shelves[level-1][k];
             }catch(Exception e){
               System.out.println(e);
-
             }
-            /                       / System.out.println("shelf: " + shelves[level-1][k]);
-            // System.out.println("current: " +current[k]);
           }
         }
         else{
           for(int k = 0; k < current.length; k++){
-            // System.out.println("start: "+ round);
             shelves[level-1][k] = current[k];
           }
         }
         round++;
       }
-      for(int y = 0; y < shelves.length; y++){
-        for(int w = 0; w < shelves[y].length; w++){
-          System.out.print(y + " " +shelves[y][w]);
+      for(int j = 0; j < 3;j++){
+        System.out.println("\nshelf: "+ j);
+        for(int w = 0; w < 13; w++){
+          System.out.println(head[w+2]+ " "+ shelves[j][w]/amount[j]+ " ");
         }
       }
     }catch(Exception e){
       System.out.println(e);
     }
+
   }
 }
